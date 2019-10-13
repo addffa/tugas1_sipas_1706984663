@@ -1,4 +1,4 @@
-package apap.tugas1.sipas.repository;
+package apap.tugas1.sipas.service;
 
 import apap.tugas1.sipas.model.Pasien;
 
