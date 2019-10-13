@@ -28,6 +28,10 @@ public class EmergencyContact implements Serializable {
     @Column(name = "no_hp", nullable = false)
     private String noHp;
 
+    @OneToOne
+    @MapsId
+    private Pasien pasien;
+
     public Long getId() {
         return id;
     }
@@ -58,5 +62,13 @@ public class EmergencyContact implements Serializable {
 
     public void setNoHp(String noHp) {
         this.noHp = noHp;
+    }
+
+    public Pasien getPasien() {
+        return pasien;
+    }
+
+    public void setPasien(Pasien pasien) {
+        this.pasien = pasien;
     }
 }

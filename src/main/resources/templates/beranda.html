@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Beranda SIPAS</title>
+</head>
+<body>
+<h1>Beranda</h1>
+<div th:each="pasien, iterationStatus: ${pasienList}">
+    <p th:text="${pasien.nik}">nik</p>
+    <p th:text="${pasien.jenisKelamin}">jenis kelamin</p>
+    <p th:text="${pasien.kode}">kode pasien</p>
+    <p th:text="${pasien.tempatLahir}">tempat lahir</p>
+    <p th:text="${pasien.tanggalLahir}">tanggal lahir</p>
+    <p th:text="${pasien.emergencyContact.noHp}">jenis kelamin</p>
+    <br/>
+</div>
+</body>
+</html>
