@@ -50,6 +50,9 @@ public class Pasien implements Serializable {
     @OneToMany(mappedBy = "pasien", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PasienAsuransi> listAsuransi;
 
+    @OneToOne(mappedBy = "pasien", cascade = CascadeType.ALL)
+    private EmergencyContact emergencyContact;
+
     public Long getId() {
         return id;
     }
@@ -120,5 +123,13 @@ public class Pasien implements Serializable {
 
     public void setListAsuransi(List<PasienAsuransi> listAsuransi) {
         this.listAsuransi = listAsuransi;
+    }
+
+    public EmergencyContact getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public void setEmergencyContact(EmergencyContact emergencyContact) {
+        this.emergencyContact = emergencyContact;
     }
 }
