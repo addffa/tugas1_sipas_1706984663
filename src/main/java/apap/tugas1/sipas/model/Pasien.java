@@ -1,5 +1,7 @@
 package apap.tugas1.sipas.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,6 +35,7 @@ public class Pasien implements Serializable {
     @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name = "tanggal_lahir", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date tanggalLahir;
 
     @NotNull

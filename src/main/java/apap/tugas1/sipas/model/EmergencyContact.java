@@ -9,8 +9,12 @@ import java.io.Serializable;
 @Table(name = "emergency_contact")
 public class EmergencyContact implements Serializable {
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    @MapsId
+    private Pasien pasien;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -27,10 +31,6 @@ public class EmergencyContact implements Serializable {
     @Size(max = 255)
     @Column(name = "no_hp", nullable = false)
     private String noHp;
-
-    @OneToOne
-    @MapsId
-    private Pasien pasien;
 
     public Long getId() {
         return id;

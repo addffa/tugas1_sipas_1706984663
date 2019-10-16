@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h3>Tambah Pasien</h3>
+<form th:action="@{/pasien/tambah}" th:object="${pasien}" method="post">
+    <table>
+        <tbody>
+        <tr>
+            <td>Nama</td>
+            <td><input class="form-control" type="text" th:field="*{nama}" /></td>
+        </tr>
+        <tr>
+            <td>NIK</td>
+            <td><input class="form-control" type="text" th:field="*{nik}" /></td>
+        </tr>
+        <tr>
+            <td>Jenis Kelamin</td>
+            <td>
+                <select class="form-control" th:field="*{jenisKelamin}">
+                    <option th:value="1" th:text="'Laki laki'"></option>
+                    <option th:value="2" th:text="'Perempuan'"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Tanggal Lahir</td>
+            <td><input class="form-control" type="date" th:field="*{tanggalLahir}" /></td>
+        </tr>
+        <tr>
+            <td>Tempat Lahir</td>
+            <td><input class="form-control" type="text" th:field="*{tempatLahir}" /></td>
+        </tr>
+        <tr>
+            <td>Asuransi</td>
+            <td>
+                <select class="form-control"
+                        th:each="asuransiPasien, itemStat : *{listAsuransi}"
+                        th:field="*{listAsuransi[__${itemStat.index}__].asuransi.id}">
+                    <option th:each="asuransi : ${asuransiList}" th:value="${asuransi.id}" th:text="${asuransi.nama}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" name="tambahAsuransi">Tambah Asuransi</button></td>
+        </tr>
+        <tr>
+            <td>Nama Kontak Darurat</td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.nama}" /></td>
+        </tr>
+        <tr>
+            <td>NIK Kontak Darurat</td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.nik}" /></td>
+        </tr>
+        <tr>
+            <td>Telepon Kontak Darurat</td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.noHp}"></td>
+        </tr>
+        <button type="submit" name="tambahPasien">submit</button>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>
