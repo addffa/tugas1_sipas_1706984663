@@ -8,11 +8,12 @@
 <h1>Beranda</h1>
 <div th:each="pasien, iterationStatus: ${pasienList}">
     <p th:text="${pasien.nik}">nik</p>
+    <p th:text="${pasien.nama}">nama</p>
     <p th:text="${pasien.jenisKelamin}">jenis kelamin</p>
     <p th:text="${pasien.kode}">kode pasien</p>
     <p th:text="${pasien.tempatLahir}">tempat lahir</p>
     <p th:text="${pasien.tanggalLahir}">tanggal lahir</p>
-    <p th:text="${pasien.emergencyContact.noHp}">jenis kelamin</p>
+    <p th:text="${pasien.emergencyContact.noHp}">no hp</p>
     <br/>
 </div>
 </body>
