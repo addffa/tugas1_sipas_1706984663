@@ -8,9 +8,11 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<h3>Tambah Pasien</h3>
+<br/>
+<h3 th:align="center">Tambah Pasien</h3>
+<br/>
 <form th:action="@{/pasien/tambah}" th:object="${pasien}" method="post">
-    <table>
+    <table th:align="center">
         <tbody>
         <tr>
             <td>Nama</td>
@@ -49,8 +51,11 @@
         </tr>
         <tr>
             <td></td>
-            <td><button type="submit" name="tambahAsuransi">Tambah Asuransi</button></td>
+            <td align="center">
+                <button type="submit" name="tambahAsuransi" class="btn btn-sm btn-primary">Tambah Asuransi</button>
+            </td>
         </tr>
+        <tr><td></td></tr>
         <tr>
             <td>Nama Kontak Darurat</td>
             <td><input class="form-control" type="text" th:field="*{emergencyContact.nama}" /></td>
@@ -63,7 +68,12 @@
             <td>Telepon Kontak Darurat</td>
             <td><input class="form-control" type="text" th:field="*{emergencyContact.noHp}"></td>
         </tr>
-        <button type="submit" name="tambahPasien">submit</button>
+        <tr>
+            <td></td>
+            <td align="right">
+                <button type="submit" name="tambahPasien" class="btn btn-success">Submit</button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </form>
