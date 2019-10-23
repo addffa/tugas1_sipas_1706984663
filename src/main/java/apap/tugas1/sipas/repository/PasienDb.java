@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PasienDb extends JpaRepository<Pasien, Long> {
-
+    Pasien findPasienByNik(String nik);
 }

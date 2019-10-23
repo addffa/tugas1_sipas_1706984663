@@ -50,7 +50,6 @@ public class PasienServiceImpl implements PasienService {
         emergencyContact.setNik(pasien.getEmergencyContact().getNik());
         emergencyContact.setPasien(newPasien);
         emergencyContactDb.save(emergencyContact);
-        System.out.println("berhasil");
 
         for(Asuransi asuransi : asuransiList) {
             PasienAsuransi newPasienAsuransi = new PasienAsuransi();
@@ -61,4 +60,7 @@ public class PasienServiceImpl implements PasienService {
         return newPasien;
     }
 
+    public Pasien getPasien(String nik) {
+        return pasienDb.findPasienByNik(nik);
+    }
 }

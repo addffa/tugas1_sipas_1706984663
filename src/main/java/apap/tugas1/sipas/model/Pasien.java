@@ -29,7 +29,7 @@ public class Pasien implements Serializable {
 
     @NotNull
     @Size(max = 255)
-    @Column(name = "nik", nullable = false)
+    @Column(name = "nik", unique = true, nullable = false)
     private String nik;
 
     @NotNull
