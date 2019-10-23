@@ -44,7 +44,7 @@
                     <td>
                         <a th:href="@{/}" class="btn btn-sm btn-dark">Tambah Diagnosis</a>
                         <a th:href="@{/pasien(nikPasien=${pasien.nik})}" class="btn btn-sm btn-primary">Lihat</a>
-                        <a th:href="@{/}" class="btn btn-sm btn-dark">Ubah</a>
+                        <a th:href="@{'/pasien/ubah/' + ${pasien.nik}}" class="btn btn-sm btn-dark">Ubah</a>
                         <a th:href="@{/}" class="btn btn-sm btn-danger">Hapus</a>
                     </td>
                 </tr>

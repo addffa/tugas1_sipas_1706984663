@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ubah Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br/>
+<h3 th:align="center">Ubah Pasien</h3>
+<br/>
+<form th:action="@{'/pasien/ubah/' + ${pasien.nik}}" th:object="${pasien}" method="post">
+    <table th:align="center">
+        <tbody>
+        <tr>
+            <td>Nama</td>
+            <td><input class="form-control" type="text" th:field="*{nama}" /></td>
+        </tr>
+        <tr>
+            <td>NIK</td>
+            <td><input class="form-control" type="text" th:field="*{nik}" /></td>
+        </tr>
+        <tr>
+            <td>Jenis Kelamin</td>
+            <td>
+                <select class="form-control" th:field="*{jenisKelamin}">
+                    <option th:value="1" th:text="'Laki laki'"></option>
+                    <option th:value="2" th:text="'Perempuan'"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Tanggal Lahir</td>
+            <td><input class="form-control" type="date" th:field="*{tanggalLahir}" /></td>
+        </tr>
+        <tr>
+            <td>Tempat Lahir</td>
+            <td><input class="form-control" type="text" th:field="*{tempatLahir}" /></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <td>Nama Kontak Darurat</td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.nama}" /></td>
+        </tr>
+        <tr>
+            <td>NIK Kontak Darurat</td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.nik}" /></td>
+        </tr>
+        <tr>
+            <td>Telepon Kontak Darurat</td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.noHp}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="right">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

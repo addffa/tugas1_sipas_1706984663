@@ -12,4 +12,6 @@ public interface PasienService {
     Pasien addPasien(Pasien pasien, List<Asuransi> asuransiList);
 
     Pasien getPasien(String nik);
+
+    Pasien changePasien(String nik, Pasien pasien);
 }

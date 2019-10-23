@@ -9,10 +9,7 @@ import apap.tugas1.sipas.util.KodePasienGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,5 +64,19 @@ public class PasienController {
         Pasien pasien = pasienService.getPasien(nik);
         model.addAttribute("pasien", pasien);
         return "detail-pasien";
+    }
+
+    @RequestMapping(value = "/pasien/ubah/{nikPasien}", method = RequestMethod.GET)
+    public String formUbahPasien(@PathVariable(value = "nikPasien") String nik, Model model) {
+        Pasien pasien = pasienService.getPasien(nik);
+        model.addAttribute("pasien", pasien);
+        return "form-ubah-pasien";
+    }
+
+    @RequestMapping(value = "/pasien/ubah/{nikPasien}", method = RequestMethod.POST)
+    public String ubahPasien(@PathVariable(value = "nikPasien") String nik, @ModelAttribute Pasien pasien,Model model) {
+        Pasien newPasien = pasienService.changePasien(nik, pasien);
+        model.addAttribute("pasien", newPasien);
+        return "ubah-pasien";
     }
 }

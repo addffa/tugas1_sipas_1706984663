@@ -60,7 +60,27 @@ public class PasienServiceImpl implements PasienService {
         return newPasien;
     }
 
+    @Override
     public Pasien getPasien(String nik) {
         return pasienDb.findPasienByNik(nik);
+    }
+
+    @Override
+    public Pasien changePasien(String nik, Pasien pasien) {
+        Pasien targetPasien = pasienDb.findPasienByNik(nik);
+        targetPasien.setKode(KodePasienGenerator.change(targetPasien.getKode(), pasien.getTanggalLahir(), pasien.getJenisKelamin()));
+        targetPasien.setNama(pasien.getNama());
+        targetPasien.setNik(pasien.getNik());
+        targetPasien.setJenisKelamin(pasien.getJenisKelamin());
+        targetPasien.setTanggalLahir(pasien.getTanggalLahir());
+        targetPasien.setTempatLahir(pasien.getTempatLahir());
+        pasienDb.save(targetPasien);
+
+        EmergencyContact emergencyContact = targetPasien.getEmergencyContact();
+        emergencyContact.setNama(pasien.getEmergencyContact().getNama());
+        emergencyContact.setNik(pasien.getEmergencyContact().getNik());
+        emergencyContact.setNoHp(pasien.getEmergencyContact().getNoHp());
+        emergencyContactDb.save(emergencyContact);
+        return targetPasien;
     }
 }
