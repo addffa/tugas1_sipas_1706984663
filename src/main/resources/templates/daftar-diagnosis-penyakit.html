@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br/>
+<h3 th:align="center">Sistem Informasi Pasien</h3>
+<br/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <a th:href="@{/diagnosis-penyakit/tambah}" class="btn btn-primary">Tambah Diagnosis Penyakit Baru</a>
+            <br/><br/>
+            <div class="card">
+                <div class="card-header bg-dark text-light">Daftar Diagnosis Penyakit</div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Kode</th>
+                            <th>Jumlah Pasien terdiagnosis</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="diagnosisPenyakit, iterStat: ${diagnosisPenyakitList}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${diagnosisPenyakit.nama}"></td>
+                            <td th:text="${diagnosisPenyakit.kode}"></td>
+                            <td th:text="${diagnosisPenyakit.listPasien.size()}"></td>
+                            <td>
+                                <a th:href="@{/diagnosis-penyakit(idDiagnosis=${diagnosisPenyakit.id})}" class="btn btn-sm btn-primary">Lihat</a>
+                                <a th:href="@{/}" class="btn btn-sm btn-dark">Ubah</a>
+                                <a th:href="@{/}" class="btn btn-sm btn-danger">Hapus</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+</body>
+</html>
