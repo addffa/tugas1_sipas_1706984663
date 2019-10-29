@@ -14,4 +14,6 @@ public interface PasienService {
     Pasien getPasien(String nik);
 
     Pasien changePasien(String nik, Pasien pasien);
+
+    void addDiagnosisPenyakitPasien(String nikPasien, Long idDiagnosis);
 }

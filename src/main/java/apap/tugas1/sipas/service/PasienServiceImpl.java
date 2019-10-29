@@ -1,9 +1,7 @@
 package apap.tugas1.sipas.service;
 
-import apap.tugas1.sipas.model.Asuransi;
-import apap.tugas1.sipas.model.EmergencyContact;
-import apap.tugas1.sipas.model.Pasien;
-import apap.tugas1.sipas.model.PasienAsuransi;
+import apap.tugas1.sipas.model.*;
+import apap.tugas1.sipas.repository.DiagnosisPenyakitDb;
 import apap.tugas1.sipas.repository.EmergencyContactDb;
 import apap.tugas1.sipas.repository.PasienAsuransiDb;
 import apap.tugas1.sipas.repository.PasienDb;
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +26,9 @@ public class PasienServiceImpl implements PasienService {
 
     @Autowired
     EmergencyContactDb emergencyContactDb;
+
+    @Autowired
+    DiagnosisPenyakitDb diagnosisPenyakitDb;
 
     @Override
     public List<Pasien> getPasienList() {
@@ -82,5 +84,17 @@ public class PasienServiceImpl implements PasienService {
         emergencyContact.setNoHp(pasien.getEmergencyContact().getNoHp());
         emergencyContactDb.save(emergencyContact);
         return targetPasien;
+    }
+
+    @Override
+    public void addDiagnosisPenyakitPasien(String nikPasien, Long idDiagnosis) {
+        Pasien pasien = pasienDb.findPasienByNik(nikPasien);
+        DiagnosisPenyakit diagnosisPenyakit = diagnosisPenyakitDb.findById(idDiagnosis).get();
+        PasienDiagnosisPenyakit diagnosisPenyakitPasien = new PasienDiagnosisPenyakit();
+        diagnosisPenyakitPasien.setPasien(pasien);
+        diagnosisPenyakitPasien.setDiagnosisPenyakit(diagnosisPenyakit);
+        diagnosisPenyakitPasien.setTanggalDiagnosis(new Date());
+        pasien.getListDiagnosisPenyakit().add(diagnosisPenyakitPasien);
+        pasienDb.save(pasien);
     }
 }
