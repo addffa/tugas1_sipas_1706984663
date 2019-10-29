@@ -32,15 +32,17 @@
                         </thead>
                         <tbody>
                         <tr th:each="diagnosisPenyakit, iterStat: ${diagnosisPenyakitList}">
-                            <td th:text="${iterStat.count}"></td>
-                            <td th:text="${diagnosisPenyakit.nama}"></td>
-                            <td th:text="${diagnosisPenyakit.kode}"></td>
-                            <td th:text="${diagnosisPenyakit.listPasien.size()}"></td>
-                            <td>
-                                <a th:href="@{/diagnosis-penyakit(idDiagnosis=${diagnosisPenyakit.id})}" class="btn btn-sm btn-primary">Lihat</a>
-                                <a th:href="@{/}" class="btn btn-sm btn-dark">Ubah</a>
-                                <a th:href="@{/}" class="btn btn-sm btn-danger">Hapus</a>
-                            </td>
+                            <form th:action="@{'/diagnosis-penyakit/hapus/' + ${diagnosisPenyakit.id}}" method="post">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${diagnosisPenyakit.nama}"></td>
+                                <td th:text="${diagnosisPenyakit.kode}"></td>
+                                <td th:text="${diagnosisPenyakit.listPasien.size()}"></td>
+                                <td>
+                                    <a th:href="@{/diagnosis-penyakit(idDiagnosis=${diagnosisPenyakit.id})}" class="btn btn-sm btn-primary">Lihat</a>
+                                    <a th:href="@{/}" class="btn btn-sm btn-dark">Ubah</a>
+                                    <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+                                </td>
+                            </form>
                         </tr>
                         </tbody>
                     </table>

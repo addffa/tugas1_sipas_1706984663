@@ -11,4 +11,6 @@ public interface DiagnosisPenyakitService {
     DiagnosisPenyakit getDiagnosisPenyakit(Long id);
 
     void addDiagnosisPenyakit(DiagnosisPenyakit diagnosisPenyakit);
+
+    boolean deleteDiagnosisPenyakit(Long id);
 }

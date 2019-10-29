@@ -32,4 +32,14 @@ public class DiagnosisPenyakitServiceImpl implements DiagnosisPenyakitService {
         newDiagnosisPenyakit.setKode(diagnosisPenyakit.getKode());
         diagnosisPenyakitDb.save(newDiagnosisPenyakit);
     }
+
+    @Override
+    public boolean deleteDiagnosisPenyakit(Long id) {
+        DiagnosisPenyakit diagnosisPenyakit = diagnosisPenyakitDb.findById(id).get();
+        if(diagnosisPenyakit.getListPasien().isEmpty()) {
+            diagnosisPenyakitDb.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

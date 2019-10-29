@@ -5,10 +5,7 @@ import apap.tugas1.sipas.service.DiagnosisPenyakitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class DiagnosisPenyakitController {
@@ -38,5 +35,13 @@ public class DiagnosisPenyakitController {
     public String tambahDiagnosisPenyakit(@ModelAttribute DiagnosisPenyakit diagnosisPenyakit) {
         diagnosisPenyakitService.addDiagnosisPenyakit(diagnosisPenyakit);
         return "tambah-diagnosis-penyakit";
+    }
+
+    @RequestMapping(value = "/diagnosis-penyakit/hapus/{idDiagnosis}")
+    public String hapusDiagnosisPenyakit(@PathVariable(value = "idDiagnosis") Long idDiagnosis, Model model) {
+        model.addAttribute("diagnosisPenyakit", diagnosisPenyakitService.getDiagnosisPenyakit(idDiagnosis));
+        boolean deleted = diagnosisPenyakitService.deleteDiagnosisPenyakit(idDiagnosis);
+        model.addAttribute("isDeleted", deleted);
+        return "hapus-diagnosis-penyakit";
     }
 }
