@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cari Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-dark text-light">Jumlah Pasien pada Diagnosis</div>
+                <div class="card-body">
+                    <h3>Masukkan Diagnosis</h3>
+                    <form th:action="@{/pasien/cari/lakilaki-perempuan}" method="get">
+                        <div class="row">
+                            <div class="col-4">
+                                <select name="idDiagnosis" class="form-control" required>
+                                    <option value="">-- Pilih Diagnosis Penyakit --</option>
+                                    <option th:each="diagnosisPenyakit : ${diagnosisPenyakitList}"
+                                            th:text="${diagnosisPenyakit.nama}" th:value="${diagnosisPenyakit.id}"
+                                            th:selected="${idDiagnosis == diagnosisPenyakit.id ? true : false}">
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cari Pasien</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br/>
+            <div th:if="${idDiagnosis != null}" class="card">
+                <div class="card-body">
+                    <h3 th:text="'Pasien pada Diagnosis ' + ${diagnosisPenyakit.nama}"></h3>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Laki-laki</th>
+                            <th>Perempuan</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${lakiLaki} + ' orang'"></td>
+                            <td th:text="${perempuan} + ' orang'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+</body>
+</html>

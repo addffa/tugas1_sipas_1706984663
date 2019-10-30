@@ -1,16 +1,14 @@
 package apap.tugas1.sipas.service;
 
 import apap.tugas1.sipas.model.*;
-import apap.tugas1.sipas.repository.DiagnosisPenyakitDb;
-import apap.tugas1.sipas.repository.EmergencyContactDb;
-import apap.tugas1.sipas.repository.PasienAsuransiDb;
-import apap.tugas1.sipas.repository.PasienDb;
+import apap.tugas1.sipas.repository.*;
 import apap.tugas1.sipas.service.PasienService;
 import apap.tugas1.sipas.util.KodePasienGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +27,9 @@ public class PasienServiceImpl implements PasienService {
 
     @Autowired
     DiagnosisPenyakitDb diagnosisPenyakitDb;
+
+    @Autowired
+    AsuransiDb asuransiDb;
 
     @Override
     public List<Pasien> getPasienList() {
@@ -96,5 +97,35 @@ public class PasienServiceImpl implements PasienService {
         diagnosisPenyakitPasien.setTanggalDiagnosis(new Date());
         pasien.getListDiagnosisPenyakit().add(diagnosisPenyakitPasien);
         pasienDb.save(pasien);
+    }
+
+    @Override
+    public List<Pasien> getPasienByAsuransi(Long idAsuransi) {
+        Asuransi asuransi = asuransiDb.findById(idAsuransi).get();
+        List<Pasien> pasienList = new ArrayList<>();
+        for(PasienAsuransi pasien : asuransi.getListPasien()) {
+            pasienList.add(pasien.getPasien());
+        }
+        return pasienList;
+    }
+
+    @Override
+    public List<Pasien> getPasienByDiagnosisPenyakit(Long idDiagnosis) {
+        DiagnosisPenyakit diagnosisPenyakit = diagnosisPenyakitDb.findById(idDiagnosis).get();
+        List<Pasien> pasienList = new ArrayList<>();
+        for(PasienDiagnosisPenyakit pasien : diagnosisPenyakit.getListPasien()) {
+            pasienList.add(pasien.getPasien());
+        }
+        return pasienList;
+    }
+
+    @Override
+    public List<Pasien> getPasienByAsuransiAndDiagnosisPenyakit(Long idAsuransi, Long idDiagnosis) {
+        return pasienDb.findAllByIdAsuransiAndIdDiagnosis(idAsuransi, idDiagnosis);
+    }
+
+    @Override
+    public Long countPasienByJenisKelaminAndDiagnosisPenyakit(Long idDiagnosis, Integer jenisKelamin) {
+        return pasienDb.countPasienByJenisKelaminAndDiagnosisPenyakit(idDiagnosis, jenisKelamin);
     }
 }

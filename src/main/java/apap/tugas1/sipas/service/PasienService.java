@@ -16,4 +16,12 @@ public interface PasienService {
     Pasien changePasien(String nik, Pasien pasien);
 
     void addDiagnosisPenyakitPasien(String nikPasien, Long idDiagnosis);
+
+    List<Pasien> getPasienByAsuransi(Long idAsuransi);
+
+    List<Pasien> getPasienByDiagnosisPenyakit(Long idDiagnosis);
+
+    List<Pasien> getPasienByAsuransiAndDiagnosisPenyakit(Long idAsuransi, Long idDiagnosis);
+
+    Long countPasienByJenisKelaminAndDiagnosisPenyakit(Long idDiagnosis, Integer jenisKelamin);
 }

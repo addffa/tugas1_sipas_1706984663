@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cari Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-dark text-light">Cari Pasien Berdasarkan Asuransi dan/atau Diagnosis Penyakit</div>
+                <div class="card-body">
+                    <h3>Masukkan Asuransi dan/atau Diagnosis Penyakit</h3>
+                    <form th:action="@{/pasien/cari}" method="get">
+                        <div class="row">
+                            <div class="col-3">
+                                <select name="idAsuransi" class="form-control">
+                                    <option value="" th:selected="${idAsuransi == null ? true : false}">
+                                        -- Pilih Asuransi --
+                                    </option>
+                                    <option th:each="asuransi : ${asuransiList}" th:text="${asuransi.nama}"
+                                            th:value="${asuransi.id}" th:selected="${idAsuransi == asuransi.id ? true : false}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <select name="idDiagnosis" class="form-control">
+                                    <option value="" th:selected="${idDiagnosis == null ? true : false}">
+                                        -- Pilih Diagnosis Penyakit --
+                                    </option>
+                                    <option th:each="diagnosisPenyakit : ${diagnosisPenyakitList}"
+                                            th:text="${diagnosisPenyakit.nama}" th:value="${diagnosisPenyakit.id}"
+                                            th:selected="${idDiagnosis == diagnosisPenyakit.id ? true : false}">
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cari Pasien</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div th:if="${result != null}" class="card">
+                <div class="card-header bg-dark text-light">Daftar Pasien</div>
+                <div class="card-body">
+                    <p th:if="${result.isEmpty()}">Tidak ada data pasien untuk Asuransi dan/atau Diagnosis Penyakit tersebut</p>
+                    <table th:unless="${result.isEmpty()}" class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>NIK</th>
+                            <th>Kode Pasien</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Telepon Kontak Darurat</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="pasien, iterStat : ${result}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${pasien.nama}"></td>
+                            <td th:text="${pasien.nik}"></td>
+                            <td th:text="${pasien.kode}"></td>
+                            <td th:text="${pasien.tempatLahir}"></td>
+                            <td th:text="${pasien.tanggalLahir}"></td>
+                            <td th:text="${pasien.emergencyContact.noHp}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+</body>
+</html>

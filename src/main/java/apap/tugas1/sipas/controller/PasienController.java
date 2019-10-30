@@ -105,4 +105,40 @@ public class PasienController {
         model.addAttribute("submitted", true);
         return "form-pasien-tambah-diagnosis-penyakit";
     }
+
+    @RequestMapping(value = "/pasien/cari", method = RequestMethod.GET)
+    public String cariPasienBerdasarkanAsuransiDiagnosis(@RequestParam(name = "idAsuransi", required = false) Long idAsuransi,
+                                                         @RequestParam(name = "idDiagnosis", required = false) Long idDiagnosis,
+                                                         Model model) {
+        model.addAttribute("asuransiList", asuransiService.getAsuransiList());
+        model.addAttribute("diagnosisPenyakitList", diagnosisPenyakitService.getDiagnosisPenyakitList());
+        model.addAttribute("idAsuransi", idAsuransi);
+        model.addAttribute("idDiagnosis", idDiagnosis);
+        List<Pasien> result;
+        if(idAsuransi == null && idDiagnosis == null) {
+            result = null;
+        } else if(idDiagnosis == null) {
+            result = pasienService.getPasienByAsuransi(idAsuransi);
+        } else if(idAsuransi == null) {
+            result = pasienService.getPasienByDiagnosisPenyakit(idDiagnosis);
+        } else {
+            result = pasienService.getPasienByAsuransiAndDiagnosisPenyakit(idAsuransi, idDiagnosis);
+        }
+        model.addAttribute("result", result);
+        return "form-cari-pasien-asuransi-diagnosis";
+    }
+
+    @RequestMapping(value = "/pasien/cari/lakilaki-perempuan", method = RequestMethod.GET)
+    public String hitungJumlahPasienBerdasarkanDiagnosis(
+            @RequestParam(value = "idDiagnosis", required = false) Long idDiagnosis,
+            Model model) {
+        if(idDiagnosis != null) {
+            model.addAttribute("diagnosisPenyakit", diagnosisPenyakitService.getDiagnosisPenyakit(idDiagnosis));
+            model.addAttribute("lakiLaki", pasienService.countPasienByJenisKelaminAndDiagnosisPenyakit(idDiagnosis, 1));
+            model.addAttribute("perempuan", pasienService.countPasienByJenisKelaminAndDiagnosisPenyakit(idDiagnosis, 2));
+        }
+        model.addAttribute("idDiagnosis", idDiagnosis);
+        model.addAttribute("diagnosisPenyakitList", diagnosisPenyakitService.getDiagnosisPenyakitList());
+        return "jumlah-pasien-diagnosis";
+    }
 }
