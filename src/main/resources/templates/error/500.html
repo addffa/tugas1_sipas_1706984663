@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Pasien Ditambahkan</title>
+    <title>500 Internal Error</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <br/>
-<h3 th:align="center" th:text="'Pasien ' + ${pasien.nama} + ' dengan kode pasien ' + ${pasien.kode} + ' berhasil ditambahkan'"></h3>
+<h1 th:align="center">Maaf terjadi kesalahan pada server</h1>
 <div th:align="center">
     <a th:href="@{/}" class="btn btn-sm btn-info">Kembali ke Beranda</a>
 </div>

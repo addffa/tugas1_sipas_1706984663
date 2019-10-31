@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tambah Pasien</title>
+    <title>Ubah Pasien</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <br/>
-<h3 th:align="center">Tambah Pasien</h3>
+<h3 th:align="center">Ubah Pasien</h3>
 <br/>
-<form th:action="@{/pasien/tambah}" th:object="${pasien}" method="post">
+<form th:action="@{'/pasien/ubah/' + ${pasien.nik}}" th:object="${pasien}" method="post">
     <table th:align="center">
         <tbody>
         <tr>
@@ -41,21 +41,10 @@
             <td><input class="form-control" type="text" th:field="*{tempatLahir}" required /></td>
         </tr>
         <tr>
-            <td>Asuransi</td>
-            <td>
-                <select class="form-control" required
-                        th:each="asuransiPasien, itemStat : *{listAsuransi}"
-                        th:field="*{listAsuransi[__${itemStat.index}__].asuransi.id}">
-                    <option value="">-- Pilih Asuransi --</option>
-                    <option th:each="asuransi : ${asuransiList}" th:value="${asuransi.id}" th:text="${asuransi.nama}"></option>
-                </select>
-            </td>
+            <td></td>
         </tr>
         <tr>
             <td></td>
-            <td align="center">
-                <button type="submit" name="tambahAsuransi" class="btn btn-sm btn-primary">Tambah Asuransi</button>
-            </td>
         </tr>
         <tr><td></td></tr>
         <tr>
@@ -73,7 +62,7 @@
         <tr>
             <td></td>
             <td align="right">
-                <button type="submit" name="tambahPasien" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </td>
         </tr>
         </tbody>

@@ -26,9 +26,25 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" th:href="@{/}">Beranda</a>
-            <a class="nav-item nav-link active" th:href="@{/}">Diagnosis Penyakit</a>
-            <a class="nav-item nav-link active" th:href="@{/}">Cari Pasien</a>
+            <li>
+                <a class="nav-item nav-link active" th:href="@{/}">Beranda</a>
+            </li>
+            <li>
+                <a class="nav-item nav-link active" th:href="@{/diagnosis-penyakit-all}">Diagnosis Penyakit</a>
+            </li>
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Cari Pasien
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/pasien/cari}">Cari Pasien Berdasarkan Asuransi dan/atau Diagnosis Penyakit</a>
+                    <a class="dropdown-item" th:href="@{/pasien/cari/lakilaki-perempuan}">Jumlah pasien pada Diagnosis</a>
+                </div>
+            </li>
+            <li>
+                <a class="nav-item nav-link active" th:href="@{/bonus}">Bonus</a>
+            </li>
         </div>
     </div>
 </nav>

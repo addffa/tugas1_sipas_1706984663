@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-dark text-light">Detail Data Pasien</div>
+                <div class="card-body">
+                    <a th:href="@{/}">Kembali ke Beranda</a>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Nama</td>
+                            <td th:text="${pasien.nama}"></td>
+                        </tr>
+                        <tr>
+                            <td>NIK</td>
+                            <td th:text="${pasien.nik}"></td>
+                        </tr>
+                        <tr>
+                            <td>Kode</td>
+                            <td th:text="${pasien.kode}"></td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td th:text="${pasien.jenisKelamin == 1 ? 'Laki laki' : 'Perempuan'}"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td th:text="${pasien.tanggalLahir}"></td>
+                        </tr>
+                        <tr>
+                            <td>Tempat Lahir</td>
+                            <td th:text="${pasien.tempatLahir}"></td>
+                        </tr>
+                        <tr>
+                            <td>Kontak Darurat</td>
+                            <td th:text="${pasien.emergencyContact.nama + ' - ' + pasien.emergencyContact.nik + ' - '
+                            + pasien.emergencyContact.noHp}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br/>
+            <form th:action="@{'/pasien/' + ${pasien.nik} + '/tambah-diagnosis'}" th:object="${diagnosisPenyakit}" method="post">
+                <select th:field="*{id}" required>
+                    <option value="" selected>--Pilih Diagnosis Penyakit--</option>
+                    <option th:each="diagnosis : ${diagnosisPenyakitList}"
+                            th:value="${diagnosis.id}" th:text="${diagnosis.nama}"></option>
+                </select>
+                <button class="btn btn-primary" type="submit">Tambah Diagnosis Penyakit Pasien</button>
+            </form>
+            <div th:if="${submitted}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <p th:text="'Diagnosis penyakit berhasil ditambahkan'"></p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card">
+                <div class="card-header bg-dark text-light">Diagnosis Penyakit milik Pasien</div>
+                <div class="card-body">
+                    <p th:if="${pasien.listDiagnosisPenyakit.isEmpty()}">
+                        Pasien tidak mempunyai data diagnosis penyakit
+                    </p>
+                    <table th:unless="${pasien.listDiagnosisPenyakit.isEmpty()}" class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Tanggal terdiagnosis</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="pasienDiagnosisPenyakit, iterStat: ${pasien.listDiagnosisPenyakit}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${pasienDiagnosisPenyakit.diagnosisPenyakit.nama}"></td>
+                            <td th:text="${pasienDiagnosisPenyakit.tanggalDiagnosis}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+</body>
+</html>

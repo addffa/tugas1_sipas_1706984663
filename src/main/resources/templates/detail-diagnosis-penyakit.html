@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-dark text-light">Detail Data Diagnosis Penyakit</div>
+                <div class="card-body">
+                    <a th:href="@{/}">Kembali ke Beranda</a>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Nama Penyakit</td>
+                            <td th:text="${diagnosisPenyakit.nama}"></td>
+                        </tr>
+                        <tr>
+                            <td>Kode Penyakit</td>
+                            <td th:text="${diagnosisPenyakit.kode}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-header bg-dark text-light">Pasien yang terdiagnosis</div>
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                        <tr th:if="${diagnosisPenyakit.listPasien.size() == 0}">
+                            <td>Tidak ada pasien yang terdiagnosis</td>
+                        </tr>
+                        <tr th:each="pasienDiagnosis, iterStat: ${diagnosisPenyakit.listPasien}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${pasienDiagnosis.pasien.nama + ' - Kode: ' + pasienDiagnosis.pasien.kode}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+</body>
+</html>
