@@ -16,16 +16,17 @@
         <tbody>
         <tr>
             <td>Nama</td>
-            <td><input class="form-control" type="text" th:field="*{nama}" /></td>
+            <td><input class="form-control" type="text" th:field="*{nama}" required /></td>
         </tr>
         <tr>
             <td>NIK</td>
-            <td><input class="form-control" type="text" th:field="*{nik}" /></td>
+            <td><input class="form-control" type="text" th:field="*{nik}" required /></td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
             <td>
-                <select class="form-control" th:field="*{jenisKelamin}">
+                <select class="form-control" th:field="*{jenisKelamin}" required>
+                    <option value="">-- Pilih Jenis Kelamin --</option>
                     <option th:value="1" th:text="'Laki laki'"></option>
                     <option th:value="2" th:text="'Perempuan'"></option>
                 </select>
@@ -33,11 +34,11 @@
         </tr>
         <tr>
             <td>Tanggal Lahir</td>
-            <td><input class="form-control" type="date" th:field="*{tanggalLahir}" /></td>
+            <td><input class="form-control" type="date" th:field="*{tanggalLahir}" required /></td>
         </tr>
         <tr>
             <td>Tempat Lahir</td>
-            <td><input class="form-control" type="text" th:field="*{tempatLahir}" /></td>
+            <td><input class="form-control" type="text" th:field="*{tempatLahir}" required /></td>
         </tr>
         <tr>
             <td></td>
@@ -48,15 +49,15 @@
         <tr><td></td></tr>
         <tr>
             <td>Nama Kontak Darurat</td>
-            <td><input class="form-control" type="text" th:field="*{emergencyContact.nama}" /></td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.nama}" required /></td>
         </tr>
         <tr>
             <td>NIK Kontak Darurat</td>
-            <td><input class="form-control" type="text" th:field="*{emergencyContact.nik}" /></td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.nik}" required /></td>
         </tr>
         <tr>
             <td>Telepon Kontak Darurat</td>
-            <td><input class="form-control" type="text" th:field="*{emergencyContact.noHp}"></td>
+            <td><input class="form-control" type="text" th:field="*{emergencyContact.noHp}" required /></td>
         </tr>
         <tr>
             <td></td>

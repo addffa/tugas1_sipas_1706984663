@@ -39,15 +39,15 @@
                     <h3 th:text="'Pasien pada Diagnosis ' + ${diagnosisPenyakit.nama}"></h3>
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>Laki-laki</th>
-                            <th>Perempuan</th>
+                        <tr align="center">
+                            <th align="center">Laki-laki</th>
+                            <th align="center">Perempuan</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td th:text="${lakiLaki} + ' orang'"></td>
-                            <td th:text="${perempuan} + ' orang'"></td>
+                            <td align="center" th:text="${lakiLaki} + ' orang'"></td>
+                            <td align="center" th:text="${perempuan} + ' orang'"></td>
                         </tr>
                         </tbody>
                     </table>

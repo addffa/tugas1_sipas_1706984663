@@ -44,4 +44,10 @@ public class DiagnosisPenyakitController {
         model.addAttribute("isDeleted", deleted);
         return "hapus-diagnosis-penyakit";
     }
+
+    @RequestMapping(value = "/bonus", method = RequestMethod.GET)
+    public String bonus(Model model) {
+        model.addAttribute("diagnosisPenyakitList", diagnosisPenyakitService.getDiagnosisPenyakitList());
+        return "bonus";
+    }
 }
